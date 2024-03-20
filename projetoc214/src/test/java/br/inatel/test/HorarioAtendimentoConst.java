@@ -42,5 +42,5 @@ public class HorarioAtendimentoConst {
                     "\"horarioDeAtendimento\": \"NULL\", \n" +
                     "\"periodo\": \"NULL\", \n" +
                     "\"sala\": 0, \n" +
-                    "\"predio\": 0 }";
+                    "\"predio\": [\"0\"]}";
 }
