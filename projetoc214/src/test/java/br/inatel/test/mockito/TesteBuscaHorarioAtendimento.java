@@ -1,9 +1,7 @@
 package br.inatel.test.mockito;
 
-import br.inatel.BuscaHorarioAtendimento;
-import br.inatel.HorarioAtendimento;
-import br.inatel.HorarioAtendimentoService;
-import br.inatel.test.HorarioAtendimentoConst;
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +9,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import br.inatel.BuscaHorarioAtendimento;
+import br.inatel.HorarioAtendimento;
+import br.inatel.HorarioAtendimentoService;
+import br.inatel.test.HorarioAtendimentoConst;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TesteBuscaHorarioAtendimento {
@@ -25,6 +25,9 @@ public class TesteBuscaHorarioAtendimento {
     public void setup(){
         buscaHorarioAtendimento = new BuscaHorarioAtendimento(service);
     }
+
+
+    //Testes de sucesso
 
     @Test
     public void testeBuscaNomeDoProfessorYvo(){
@@ -123,6 +126,96 @@ public class TesteBuscaHorarioAtendimento {
 
     }
 
+    //Testes de falha
+    @Test
+    public void testeBuscaNomeDoProfessorYvoFalha(){
+        Mockito.when(service.buscaHorarioAtendimento("YV")).thenReturn(HorarioAtendimentoConst.INEXISTENTE);
 
+        HorarioAtendimento yvo = buscaHorarioAtendimento.buscaHorarioAtendimento("YV");
+        //Faz assertion
+        assertNotEquals("Yvo", yvo.getNomeDoProfessor());
+
+    }
+    @Test
+    public void testeBuscaHorarioAtendimentoChrisFalha(){
+        Mockito.when(service.buscaHorarioAtendimento("CHRIS")).thenReturn(HorarioAtendimentoConst.CHRIS);
+
+        HorarioAtendimento chris = buscaHorarioAtendimento.buscaHorarioAtendimento("CHRIS");
+        //Faz assertion
+        assertFalse("19h30".equals(chris.getHorarioAtendimento()));
+    }
+
+    @Test
+    public void testeBuscaPeriodoRenzoFalha(){
+        Mockito.when(service.buscaHorarioAtendimento("RENZO")).thenReturn(HorarioAtendimentoConst.RENZO);
+
+        HorarioAtendimento renzo = buscaHorarioAtendimento.buscaHorarioAtendimento("RENZO");
+        //Faz assertion
+        assertNotEquals("Diurno", renzo.getPeriodo());
+    }
+
+    @Test
+    public void testeBuscaSalaVitoriaFalha(){
+        Mockito.when(service.buscaHorarioAtendimento("VITORIA")).thenReturn(HorarioAtendimentoConst.VITORIA);
+
+        HorarioAtendimento vitoria = buscaHorarioAtendimento.buscaHorarioAtendimento("VITORIA");
+        //Faz assertion
+        assertNotEquals(14, vitoria.getSala());
+    }
+
+    @Test
+    public void testeBuscaPredioMarceloFalha(){
+        Mockito.when(service.buscaHorarioAtendimento("MARCELO")).thenReturn(HorarioAtendimentoConst.MARCELO);
+
+        HorarioAtendimento marcelo = buscaHorarioAtendimento.buscaHorarioAtendimento("MARCELO");
+        //Faz assertion
+        assertNotEquals("7", marcelo.getPredio());
+    }
+
+    @Test
+    public void testeBuscaHorarioAtendimentoInexistenteFalha(){
+        Mockito.when(service.buscaHorarioAtendimento("SONED")).thenReturn(HorarioAtendimentoConst.INEXISTENTE);
+
+        HorarioAtendimento inexistente = buscaHorarioAtendimento.buscaHorarioAtendimento("SONED");
+        //Faz assertion
+        assertFalse("Soned".equals(inexistente.getNomeDoProfessor()));
+    }
+
+    @Test
+    public void testeBuscaHorarioAtendimentoInvalido(){
+
+        Mockito.when(service.horarioAtendimentoExistente("Yvo")).thenReturn(false);
+        boolean horarioAtendimentoValido = service.horarioAtendimentoExistente("Yvo");
+
+        assertFalse(horarioAtendimentoValido);
+    }
+
+    @Test
+    public void testeBuscarHorarioAtendimentoTipoFalha(){
+        Mockito.when(service.buscaHorarioAtendimento("YVO")).thenReturn(HorarioAtendimentoConst.YVO);
+        HorarioAtendimento yvo = buscaHorarioAtendimento.buscaHorarioAtendimento("YVO");
+
+        assertFalse(yvo instanceof HorarioAtendimentoService);
+
+    }
+    
+    @Test
+    public void testeBuscaHorarioAtendimentoValidoFalse(){
+
+        Mockito.when(service.horarioAtendimentoExistente("Yvo")).thenReturn(false);
+        boolean horarioAtendimentoValido = service.horarioAtendimentoExistente("Yvo");
+
+        assertFalse(horarioAtendimentoValido);
+    }
+    
+    @Test
+    public void testeBuscaNomeDoProfessorYvoAssertNotEquals(){
+        Mockito.when(service.buscaHorarioAtendimento("YV")).thenReturn(HorarioAtendimentoConst.INEXISTENTE);
+
+        HorarioAtendimento yvo = buscaHorarioAtendimento.buscaHorarioAtendimento("YV");
+        //Faz assertion
+        assertNotEquals("Yvo", yvo.getNomeDoProfessor());
+
+    }
 
 }
