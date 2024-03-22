@@ -12,11 +12,9 @@ public class BuscaHorarioAtendimento {
     }
 
     public HorarioAtendimento buscaHorarioAtendimento(String nomeDoProfessor){
-        // id = 10 -> buscando um HorarioAtendimento de ID 10
-        //atendimentoJson é uma string que retornou do serviço
+
         String atendimentoJson = horarioAtendimentoService.buscaHorarioAtendimento(nomeDoProfessor);
 
-        //jsonObject é um objeto JSON feito a partir da string de retonro
         JsonObject jsonObject = JsonParser.parseString(atendimentoJson).getAsJsonObject();
 
         return new HorarioAtendimento(jsonObject.get("nomeDoProfessor").getAsString(),
