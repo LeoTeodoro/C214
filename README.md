@@ -5,4 +5,3 @@
 Alunos:
 [Leonardo Teodoro](https://github.com/LeoTeodoro)
 [Lucas de Martha](https://github.com/lucasdemartha)
-[Gabriel de Souza Gemelle Leal](https://github.com/ggemelle)
