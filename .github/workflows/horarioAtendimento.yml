@@ -60,6 +60,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+          MAIL_TO: lucas.martha@ges.inatel.br
+          MAIL_SUBJECT: Rodando Pipeline
+          MAIL_BODY: Pipeline executado!
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
